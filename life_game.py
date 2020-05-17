@@ -29,11 +29,11 @@ Initial_Board = creation(Board_Base)
 def next_state(board):
     new_board = np.array([[0] * columns for i in range(rows)])
     for row in range(rows -1):
-        if (row - 1) < 0 or (row + 1) > rows:
+        if (row - 1) < 0 or (row + 1) >= rows:
             continue
         for column in range(columns - 1):
             neighbours = 0
-            if (column - 1) < 0 or (column + 1) > columns:
+            if (column - 1) < 0 or (column + 1) >= columns:
                 continue
             else:
                 neighbours += board[row - 1][column + 1]
@@ -44,11 +44,11 @@ def next_state(board):
                 neighbours += board[row - 1][column - 1]
                 neighbours += board[row][column - 1]
                 neighbours += board[row + 1][column - 1]
-                if neighbours == 2 :  # Normal :If 2 or 3 neighbours changes state to alive: 1
+                if neighbours == 2 or neighbours == 3:  # Normal :If 2 or 3 neighbours changes state to alive: 1
                     new_board[row][column] = 1
-                elif neighbours == 0 :  # Underpopulation: If 0 or 1 neighbours changes state to dead: 0
+                elif neighbours == 0 or neighbours == 1:  # Underpopulation: If 0 or 1 neighbours changes state to dead: 0
                     new_board[row][column] = 0
-                elif neighbours > 4:  # Overpopulation : change state to dead: 0
+                else neighbours > 4:  # Overpopulation : change state to dead: 0
                     new_board[row][column] = 0
     return new_board
 
