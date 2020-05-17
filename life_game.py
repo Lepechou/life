@@ -22,7 +22,28 @@ def creation(board):
     return board
 
 
-lol = creation(a)
+Initial_Board = creation(a)
 
-print(lol)
+
+def cell_state(board):
+    while True:
+        new_board = []
+        for row in range(n):
+            for column in range(n):
+                neighbours = 0
+                neighbours += board[row - 1][column + 1]
+                neighbours += board[row][column + 1]
+                neighbours += board[row + 1][column + 1]
+                neighbours += board[row - 1][column]
+                neighbours += board[row + 1][column]
+                neighbours += board[row - 1][column - 1]
+                neighbours += board[row][column - 1]
+                neighbours += board[row + 1][column - 1]
+                if neighbours == 2 or 3:
+                    new_board[row][column] = 1
+                elif neighbours == 0 or 1:
+                    new_board[row][column] = 0
+                else:
+                    new_board[row][column] = 0
+        yield new_board
 
